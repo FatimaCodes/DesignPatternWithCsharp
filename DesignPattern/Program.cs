@@ -8,7 +8,6 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             #region Singleton
             Console.WriteLine("***Singleton Pattern Demo***\n");
             //Console.WriteLine(Singleton.MyInt);
