@@ -12,6 +12,9 @@ namespace DesignPattern
             CallerClass.SingleResponsibilityCaller();
             CallerClass.OpenCloseDeveloperSalaryCaller();
             CallerClass.OpenCloseMonitorFilterCaller();
+            CallerClass.LisKovSubstitution();
+            CallerClass.DependencyInversion();
+
             //#region Singleton
             //Console.WriteLine("***Singleton Pattern Demo***\n");
             ////Console.WriteLine(Singleton.MyInt);

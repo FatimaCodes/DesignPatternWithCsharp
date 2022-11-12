@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static DesignPattern.SOLID_Principles.DependencyInversion;
+using static DesignPattern.SOLID_Principles.LiskovSubstitution;
 using static DesignPattern.SOLID_Principles.OpenClose;
 using static DesignPattern.SOLID_Principles.SingleResponsibility;
 
@@ -20,7 +23,6 @@ namespace DesignPattern.SOLID_Principles
             var saver = new FileSaver();
             saver.SaveToFile(@"Reports", "WorkReport.txt", report);
         }
-
         public static void OpenCloseDeveloperSalaryCaller()
         {
             var devCalculations = new List<BaseSalaryCalculator>
@@ -43,7 +45,6 @@ namespace DesignPattern.SOLID_Principles
                 new ComputerMonitor { Name = "Dell D2J47", Screen = Screen.CurvedScreen, Type = MonitorType.LCD }
             };
 
-
             var filter = new MonitorFilter();
 
             var lcdMonitors = filter.Filter(monitors, new MonitorTypeSpecification(MonitorType.LCD));
@@ -60,5 +61,48 @@ namespace DesignPattern.SOLID_Principles
                 Console.WriteLine($"Name: {monitor.Name}, Type: {monitor.Type}, Screen: {monitor.Screen}");
             }
         }
+        public static void LisKovSubstitution()
+        {
+            var numbers = new int[] { 5, 7, 9, 8, 1, 6, 4 };
+
+            Calculator sum = new SumCalculator(numbers);
+            Console.WriteLine($"The sum of all the numbers: {sum.Calculate()}");
+
+            Console.WriteLine();
+
+            Calculator evenSum = new EvenNumbersSumCalculator(numbers);
+            Console.WriteLine($"The sum of all the even numbers: {evenSum.Calculate()}");
+
+            Console.WriteLine();
+
+            Calculator oddSum = new OddNumbersSumCalculator(numbers);
+            Console.WriteLine($"The sum of all the odd numbers: {oddSum.Calculate()}");
+        }
+        public static void InterfaceSegregation()
+        {
+            var numbers = new int[] { 5, 7, 9, 8, 1, 6, 4 };
+
+            Calculator sum = new SumCalculator(numbers);
+            Console.WriteLine($"The sum of all the numbers: {sum.Calculate()}");
+
+            Console.WriteLine();
+
+            Calculator evenSum = new EvenNumbersSumCalculator(numbers);
+            Console.WriteLine($"The sum of all the even numbers: {evenSum.Calculate()}");
+
+            Console.WriteLine();
+
+            Calculator oddSum = new OddNumbersSumCalculator(numbers);
+            Console.WriteLine($"The sum of all the odd numbers: {oddSum.Calculate()}");
+        }
+        public static void DependencyInversion()
+        {
+            var empManager = new EmployeeManager();
+            empManager.AddEmployee(new Employee { Name = "Leen", Gender = Gender.Female, Position = Position.Manager });
+            empManager.AddEmployee(new Employee { Name = "Mike", Gender = Gender.Male, Position = Position.Administrator });
+            var stats = new EmployeeStatistics(empManager);
+            Console.WriteLine($"Number of female managers in our company is: {stats.CountFemaleManagers()}");
+        }
     }
 }
+    
